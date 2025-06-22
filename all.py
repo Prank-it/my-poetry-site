@@ -167,6 +167,7 @@ def view_poem(poem_id):
     poem = doc.to_dict()
     return render_template('poem.html', poem=poem)
 
-# Run the app
+# Run the app with Render-compatible port binding
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
