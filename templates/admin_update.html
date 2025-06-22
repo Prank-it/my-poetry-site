@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Poem</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="wood-header">
+    <div class="site-name">Update Poem</div>
+    <nav class="nav-links">
+      <a href="{{ url_for('admin_edit') }}">Back to Edit</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h1 class="title">Edit Poem</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="{{ poem.title }}" required>
+      
+      <label for="category">Select Category:</label>
+      <select id="category" name="category" required>
+        <option value="Love" {% if poem.category == 'Love' %}selected{% endif %}>Love</option>
+        <option value="Nature" {% if poem.category == 'Nature' %}selected{% endif %}>Nature</option>
+        <option value="Sad" {% if poem.category == 'Sad' %}selected{% endif %}>Sad</option>
+        <option value="Haiku" {% if poem.category == 'Haiku' %}selected{% endif %}>Haiku</option>
+      </select>
+
+      <label for="content">Content:</label>
+      <textarea id="content" name="content" rows="5" required>{{ poem.content }}</textarea>
+
+      <label for="thumbnail">Update Thumbnail (optional):</label>
+      <input type="file" name="thumbnail" accept="image/*">
+
+      <button type="submit">Update Poem</button>
+    </form>
+  </section>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poem Shelf</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- Wooden Header -->
+  <header class="wood-header">
+    <h1 class="site-name">Poem Shelf</h1>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#poems">Poems</a>
+      <a href="#contact">Contact Us</a>
+     
+
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="section">
+    <h2 class="title">Welcome to Poem Shelf</h2>
+    <div class="quote-box">"If poetry were a pizza, we'd be delivering emotions with extra cheese."</div>
+  </section>
+
+  <!-- Poem Section -->
+  <section id="poems" class="section">
+    <h2 class="title">Poem Books</h2>
+
+    <div class="shelf">
+      {% for category in categories.keys() %}
+      <a href="{{ url_for('view_category', category_name=category) }}" class="book-container">
+        <div class="book">
+          <img src="{{ url_for('static', filename=category|lower ~ '.jpeg') }}" alt="{{ category }} Poems" />
+        </div>
+        <span class="tag">{{ category }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <h2 class="title">Contact Us</h2>
+    <p>Email us at: <a href="mailto:hello@poemshelf.com">hello@poemshelf.com</a></p>
+    <p class="quote">"Poetry is when an emotion has found its thought and the thought has found words."</p>
+  </section>
+
+</body>
+</html>

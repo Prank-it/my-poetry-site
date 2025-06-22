@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .dashboard-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .dashboard-buttons a {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #874c62;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .dashboard-buttons a:hover {
+      background-color: #a8657a;
+    }
+  </style>
+</head>
+<body>
+  <header class="wood-header">
+    <div class="site-name">Poem Shelf - Admin</div>
+    <nav class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2 class="title">Admin Dashboard</h2>
+    <div class="dashboard-buttons">
+      <a href="{{ url_for('admin_post') }}">Post Content</a>
+      <a href="{{ url_for('admin_edit') }}">Edit Content</a>
+    </div>
+  </section>
+</body>
+</html>

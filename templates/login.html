@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    form {
+      max-width: 400px;
+      margin: 5em auto;
+      padding: 2em;
+      background: #fff7e6;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label, input {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em;
+      font-size: 1rem;
+    }
+    input {
+      padding: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.6em 2em;
+      background-color: #874c62;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="wood-header">
+    <div class="site-name">Poem Shelf</div>
+    <nav class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST">
+    <h2>Admin Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Login</button>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Post a New Poem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="wood-header">
+        <div class="site-name">Post Poem</div>
+        <nav class="nav-links">
+            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <section class="section">
+        <h1 class="title">Upload a New Poem</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="category">Select Category:</label>
+            <select id="category" name="category" required>
+                <option value="Love">Love</option>
+                <option value="Nature">Nature</option>
+                <option value="Sad">Sad</option>
+                <option value="Haiku">Haiku</option>
+            </select>
+
+            <label for="content">Poem Content:</label>
+            <textarea id="content" name="content" rows="6" required></textarea>
+
+            <label for="thumbnail">Upload Thumbnail:</label>
+            <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+
+            <button type="submit">Submit Poem</button>
+        </form>
+    </section>
+
+    <footer class="contact">
+        <p>Contact us: <a href="mailto:example@email.com">example@email.com</a></p>
+    </footer>
+</body>
+</html>

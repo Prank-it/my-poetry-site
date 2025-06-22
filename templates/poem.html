@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ poem.title }} - Poem Shelf</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .poem-container {
+      max-width: 800px;
+      margin: 4em auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2em;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .poem-title {
+      font-size: 2.2rem;
+      color: #7d3f3f;
+      margin-bottom: 0.5em;
+    }
+
+    .poem-category {
+      font-size: 1rem;
+      color: #a67454;
+      margin-bottom: 1.5em;
+    }
+
+    .poem-content {
+      white-space: pre-line;
+      font-size: 1.1rem;
+      color: #4f3a3a;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2em;
+      text-decoration: none;
+      background: #874c62;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .back-link:hover {
+      background: #a05a75;
+    }
+
+    .poem-thumbnail {
+      max-width: 100%;
+      max-height: 300px;
+      margin-bottom: 1.5em;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="wood-header">
+    <h1 class="site-name">Poem Shelf</h1>
+    <nav class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+    </nav>
+  </header>
+
+  <div class="poem-container">
+    {% if poem.thumbnail %}
+      <img src="{{ poem.thumbnail }}" alt="Poem Thumbnail" class="poem-thumbnail" />
+    {% endif %}
+    <div class="poem-title">{{ poem.title }}</div>
+    <div class="poem-category">{{ poem.category }}</div>
+    <div class="poem-content">{{ poem.content }}</div>
+
+    <a href="{{ url_for('view_category', category_name=poem.category) }}" class="back-link">← Back to {{ poem.category }}</a>
+  </div>
+
+</body>
+</html>
