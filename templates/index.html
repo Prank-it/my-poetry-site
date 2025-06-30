@@ -1,53 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Poem Shelf</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <div class="overlay"></div>
 
-  <!-- Wooden Header -->
-  <header class="wood-header">
-    <h1 class="site-name">Poem Shelf</h1>
-    <nav class="nav-links">
-      <a href="#home">Home</a>
-      <a href="#poems">Poems</a>
-      <a href="#contact">Contact Us</a>
-      <a href="{{ url_for('login') }}" class="admin-link">Admin</a>
-
-    </nav>
-  </header>
-
-  <!-- Home Section -->
-  <section id="home" class="section">
-    <h2 class="title">Welcome to Poem Shelf</h2>
-    <div class="quote-box">"If poetry were a pizza, we'd be delivering emotions with extra cheese."</div>
-  </section>
-
-  <!-- Poem Section -->
-  <section id="poems" class="section">
-    <h2 class="title">Poem Books</h2>
-
-    <div class="shelf">
-      {% for category in categories.keys() %}
-      <a href="{{ url_for('view_category', category_name=category) }}" class="book-container">
-        <div class="book">
-          <img src="{{ url_for('static', filename=category|lower ~ '.jpeg') }}" alt="{{ category }} Poems" />
-        </div>
-        <span class="tag">{{ category }}</span>
-      </a>
-      {% endfor %}
+  <div class="content-wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="site-name">Poem Shelf</div>
+      <div class="nav-links">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('poem_intro') }}">Poems</a>
+        <a href="#contact">Contact Us</a>
+        {% if session.get('admin') %}
+          <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Admin</a>
+        {% endif %}
+      </div>
     </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section contact">
-    <h2 class="title">Contact Us</h2>
-    <p>Email us at: <a href="mailto:hello@poemshelf.com">hello@poemshelf.com</a></p>
-    <p class="quote">"Poetry is when an emotion has found its thought and the thought has found words."</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+      <p class="welcome">WELCOME TO</p>
+      <h1 class="poem-title">POEM SHELF</h1>
+    </section>
 
+    <!-- Quote Section -->
+    <div class="section">
+      <div class="quote-box">
+        "If poetry were a pizza, we'd be delivering emotions with extra cheese."
+      </div>
+      <a href="#blog" class="explore-btn">Explore More</a>
+    </div>
+
+    <!-- Discover Section -->
+    <section class="discover-section" id="discover">
+      <div class="discover-container">
+        <div class="discover-img">
+          <img src="{{ url_for('static', filename='images/image1.jpeg') }}" alt="Discover Poetry">
+        </div>
+        <div class="discover-text">
+          <h2>Discover the Beauty of Poetry</h2>
+          <p class="subtext">Immerse yourself in the world of aesthetic poetry, captivating books, and inspiring writings.</p>
+          <p>Poem Shelf is a sanctuary for poetry lovers and avid readers. Join us on a journey of literary exploration.</p>
+          <a href="{{ url_for('poem_intro') }}" class="learn-btn">Learn More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-video-section" id="blog">
+      <div class="blog-video-container">
+        <video id="blogVideo" autoplay muted loop playsinline></video>
+        <div class="blog-video-overlay">
+          <div class="blog-content">
+            <h2 class="blog-title">THE BLOG</h2>
+            <p class="blog-subtitle">dive deeper into the stories</p>
+            <a href="#" class="blog-button">SHOW THE POSTS</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="section contact" id="contact">
+      <h1 class="title">Contact Us</h1>
+      <p>Email us at: contact@poemshelf.com</p>
+      <div class="quote">
+        "Poetry is when an emotion has found its thought and the thought has found words."
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript for video slideshow -->
+  <script>
+    const videoElement = document.getElementById('blogVideo');
+    const videoSources = [
+      "{{ url_for('static', filename='videos/video1.mp4') }}",
+      "{{ url_for('static', filename='videos/video2.mp4') }}",
+      "{{ url_for('static', filename='videos/video3.mp4') }}"
+    ];
+    let currentVideo = 0;
+    function playNextVideo() {
+      videoElement.src = videoSources[currentVideo];
+      videoElement.load();
+      videoElement.play();
+      currentVideo = (currentVideo + 1) % videoSources.length;
+      videoElement.onended = playNextVideo;
+    }
+    playNextVideo();
+  </script>
 </body>
 </html>

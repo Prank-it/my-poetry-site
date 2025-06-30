@@ -166,8 +166,13 @@ def view_poem(poem_id):
         return "Poem not found", 404
     poem = doc.to_dict()
     return render_template('poem.html', poem=poem)
+@app.route('/poem')
+def poem_intro():
+    return render_template('poem.html')
+
 
 # Run the app with Render-compatible port binding
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
+

@@ -3,82 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ poem.title }} - Poem Shelf</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Poem Shelf</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='csspoem.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
-    .poem-container {
-      max-width: 800px;
-      margin: 4em auto;
-      background: rgba(255, 255, 255, 0.85);
-      padding: 2em;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
+    /* Translucent Navbar */
+    .poem-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
-    .poem-title {
-      font-size: 2.2rem;
-      color: #7d3f3f;
-      margin-bottom: 0.5em;
+    .poem-navbar .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #333;
     }
 
-    .poem-category {
-      font-size: 1rem;
-      color: #a67454;
-      margin-bottom: 1.5em;
-    }
-
-    .poem-content {
-      white-space: pre-line;
-      font-size: 1.1rem;
-      color: #4f3a3a;
-      line-height: 1.8;
-      text-align: left;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-top: 2em;
+    .poem-navbar .nav-links a {
+      margin-left: 1.5rem;
       text-decoration: none;
-      background: #874c62;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      transition: background 0.3s;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    .back-link:hover {
-      background: #a05a75;
+    .poem-navbar .nav-links a:hover {
+      color: #000;
     }
 
-    .poem-thumbnail {
-      max-width: 100%;
-      max-height: 300px;
-      margin-bottom: 1.5em;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    body {
+      padding-top: 80px; /* Space for fixed navbar */
     }
   </style>
 </head>
 <body>
 
-  <header class="wood-header">
-    <h1 class="site-name">Poem Shelf</h1>
-    <nav class="nav-links">
+  <!-- Translucent Navbar -->
+  <nav class="poem-navbar">
+    <div class="logo">Poem Shelf</div>
+    <div class="nav-links">
       <a href="{{ url_for('index') }}">Home</a>
-    </nav>
-  </header>
+      <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+      <a href="{{ url_for('index') }}#blog">Blog</a>
+    </div>
+  </nav>
 
-  <div class="poem-container">
-    {% if poem.thumbnail %}
-      <img src="{{ poem.thumbnail }}" alt="Poem Thumbnail" class="poem-thumbnail" />
-    {% endif %}
-    <div class="poem-title">{{ poem.title }}</div>
-    <div class="poem-category">{{ poem.category }}</div>
-    <div class="poem-content">{{ poem.content }}</div>
+  <!-- Section 1: Bonding Love Stories -->
+  <section class="main-section">
+    <div class="text-content">
+      <h1>BONDING LOVE STORIES</h1>
+      <h2>one frame at a time</h2>
+      <p>
+        Short description of your business here. Chartreuse hammock before they sold out mlkshk...
+      </p>
+      <a href="#" class="learn-button">LEARN MORE</a>
+    </div>
+    <div class="image-content">
+      <img src="{{ url_for('static', filename='poemimage1.jpeg') }}" alt="Poet">
+    </div>
+  </section>
 
-    <a href="{{ url_for('view_category', category_name=poem.category) }}" class="back-link">← Back to {{ poem.category }}</a>
-  </div>
+  <hr class="section-divider-dark"/>
+
+  <!-- Section 2: Packages -->
+  <section class="packages-section">
+    <h2 class="section-title">PACKAGES</h2>
+    <div class="package-grid">
+      <a href="/category/love" class="package-card">
+        <img src="{{ url_for('static', filename='love.jpeg') }}" alt="Love Poems">
+        <p>Love Poems</p>
+      </a>
+      <a href="/category/sad" class="package-card">
+        <img src="{{ url_for('static', filename='sad.jpeg') }}" alt="Sad Poems">
+        <p>Sad Poems</p>
+      </a>
+      <a href="/category/motivational" class="package-card">
+        <img src="{{ url_for('static', filename='motivational.jpeg') }}" alt="Motivational Poems">
+        <p>Motivational Poems</p>
+      </a>
+    </div>
+  </section>
+
+  <hr class="section-divider-dark"/>
+
+  <!-- Section 3: Authors -->
+  <section class="author-section">
+    <h2>MEET OUR AUTHORS</h2>
+
+    <div class="author-content">
+      <div class="author-image">
+        <img src="{{ url_for('static', filename='author1.jpeg') }}" alt="Author 1">
+      </div>
+      <div class="author-text">
+        <h3>Hi, I'm <span class="fancy">Lucia</span></h3>
+        <p class="subtitle">Poet & Storyteller</p>
+        <p>
+          I write verses that make hearts bloom and eyes soften. My ink is love, my pen a whisper.
+        </p>
+        <a href="#" class="learn-button">LEARN MORE</a>
+      </div>
+    </div>
+
+    <div class="author-content reverse">
+      <div class="author-image">
+        <img src="{{ url_for('static', filename='author2.jpeg') }}" alt="Author 2">
+      </div>
+      <div class="author-text">
+        <h3>Hi, I'm <span class="fancy">Rohan</span></h3>
+        <p class="subtitle">Poet of Solitude</p>
+        <p>
+          I pen sorrow, strength, and reflections of the soul. Each poem invites you into thought and warmth.
+        </p>
+        <a href="#" class="learn-button">LEARN MORE</a>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>

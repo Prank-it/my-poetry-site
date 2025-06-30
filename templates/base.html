@@ -1,0 +1,247 @@
+Static Queue:
+java
+Copy code
+class StaticQueue {
+    private int size;
+    private int[] queue;
+    private int front, rear;
+
+    public StaticQueue(int size) {
+        this.size = size;
+        this.queue = new int[size];
+        this.front = this.rear = -1;
+    }
+
+    public void enqueue(int item) {
+        if (rear == size - 1) {
+            System.out.println("Queue is full. Cannot enqueue.");
+        } else {
+            if (front == -1) {
+                front = 0;
+            }
+            rear++;
+            queue[rear] = item;
+        }
+    }
+
+    public int dequeue() {
+        if (front == -1) {
+            System.out.println("Queue is empty. Cannot dequeue.");
+            return -1;
+        } else {
+            int item = queue[front];
+            front++;
+            if (front > rear) {
+                front = rear = -1;
+            }
+            return item;
+        }
+    }
+}
+
+// Example usage:
+public class Main {
+    public static void main(String[] args) {
+        StaticQueue queue = new StaticQueue(5);
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        System.out.println("Dequeued: " + queue.dequeue());
+        System.out.println("Dequeued: " + queue.dequeue());
+    }
+}
+Output:
+
+makefile
+Copy code
+Dequeued: 1
+Dequeued: 2
+Static Stack:
+java
+Copy code
+class StaticStack {
+    private int size;
+    private int[] stack;
+    private int top;
+
+    public StaticStack(int size) {
+        this.size = size;
+        this.stack = new int[size];
+        this.top = -1;
+    }
+
+    public void push(int item) {
+        if (top == size - 1) {
+            System.out.println("Stack is full. Cannot push.");
+        } else {
+            top++;
+            stack[top] = item;
+        }
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack is empty. Cannot pop.");
+            return -1;
+        } else {
+            int item = stack[top];
+            top--;
+            return item;
+        }
+    }
+}
+
+// Example usage:
+public class Main {
+    public static void main(String[] args) {
+        StaticStack stack = new StaticStack(5);
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        System.out.println("Popped: " + stack.pop());
+        System.out.println("Popped: " + stack.pop());
+    }
+}
+Output:
+
+makefile
+Copy code
+Popped: 3
+Popped: 2
+Inheritance:
+java
+Copy code
+class Animal {
+    protected String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public void speak() {
+        System.out.println("Animal speaks");
+    }
+}
+
+class Dog extends Animal {
+    public Dog(String name) {
+        super(name);
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + " says Woof!");
+    }
+}
+
+class Cat extends Animal {
+    public Cat(String name) {
+        super(name);
+    }
+
+    @Override
+    public void speak() {
+        System.out.println(name + " says Meow!");
+    }
+}
+
+// Example usage:
+public class Main {
+    public static void main(String[] args) {
+        Dog dog = new Dog("Buddy");
+        Cat cat = new Cat("Whiskers");
+        dog.speak();
+        cat.speak();
+    }
+}
+Output:
+
+Copy code
+Buddy says Woof!
+Whiskers says Meow!
+Abstraction:
+java
+Copy code
+abstract class Shape {
+    abstract double area();
+}
+
+class Circle extends Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+// Example usage:
+public class Main {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+        System.out.println("Circle Area: " + circle.area());
+    }
+}
+Output:
+
+mathematica
+Copy code
+Circle Area: 78.53981633974483
+Interface:
+java
+Copy code
+interface Shape {
+    double area();
+}
+
+class Circle implements Shape {
+    private double radius;
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+// Example usage:
+public class Main {
+    public static void main(String[] args) {
+        Circle circle = new Circle(5);
+        System.out.println("Circle Area: " + circle.area());
+    }
+}
+Output:
+
+mathematica
+Copy code
+Circle Area: 78.53981633974483
+Recursion:
+java
+Copy code
+public class Main {
+    public static void main(String[] args) {
+        int result = factorial(5);
+        System.out.println("Factorial of 5: " + result);
+    }
+
+    public static int factorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        } else {
+            return n * factorial(n - 1);
+        }
+    }
+}
+Output:
+
+mathematica
+Copy code
+Factorial of 5: 120

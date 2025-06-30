@@ -1,206 +1,293 @@
 /* General */
+html{
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: 'Georgia', serif;
-  background: url('library-bg.jpeg') center center / cover fixed,
-              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"><text x="0" y="40" font-size="40">📜</text></svg>') repeat;
-  color: #5c4a4a;
+  background-image: url("/static/images/bg-tile.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+  color: #fff;
   scroll-behavior: smooth;
   position: relative;
 }
 
-body::before {
-  content: "";
+/* Dark overlay */
+.overlay {
   position: fixed;
   inset: 0;
-  background: url('library-bg.jpeg') center center / cover no-repeat fixed;
-  filter: blur(5px) brightness(1.1);
-  z-index: -3;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
 }
 
-/* Wooden Header */
-.wood-header {
-  background: linear-gradient(145deg, #6f3a1f, #512d1a);
-  padding: 1.5em 2em;
+/* Content wrapper */
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  padding: 1em 2em;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 4px solid #3a1f0f;
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .site-name {
-  font-size: 2.2rem;
-  color: #ffe9c4;
-  text-shadow: 1px 1px 4px #000;
-  display: flex;
-  align-items: center;
-}
-
-.site-name::before {
-  content: "🩶";
-  margin-right: 0.5em;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
 }
 
 .nav-links a {
   margin-left: 1.5em;
   text-decoration: none;
-  font-weight: bold;
-  color: #ffe9c4;
-  font-size: 1.1rem;
-  transition: all 0.2s;
+  color: #ccc;
+  font-size: 1rem;
+  transition: color 0.3s;
 }
 
 .nav-links a:hover {
-  color: #ffcc8a;
-  transform: scale(1.05);
+  color: #fff;
+}
+
+/* Hero Section */
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2em;
+}
+
+.welcome {
+  font-size: 1.6rem;
+  letter-spacing: 0.35em;
+  color: #eee;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.poem-title {
+  font-size: 6vw;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
 }
 
 /* Sections */
 .section {
-  padding: 6em 2em;
+  padding: 4em 2em;
   text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #eee;
 }
 
 .title {
   font-size: 2.5rem;
   margin-bottom: 1em;
-  color: #874c62;
+  color: #fff;
+  font-family: 'Georgia', serif;
 }
 
 .quote-box {
   margin: 1em auto;
-  max-width: 500px;
-  font-family: 'Courier New', cursive;
+  max-width: 600px;
   font-style: italic;
-  font-size: 1.3rem;
-  background: rgba(255,255,255,0.5);
-  padding: 1em;
-  border-radius: 10px;
-  transform: rotate(-2deg);
-  color: #5a3d3d;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-/* Shelves */
-.shelf {
-  display: flex;
-  justify-content: center;
-  gap: 3em;
-  align-items: flex-end;
-  margin: 3em auto;
-  padding: 20px;
-  background: linear-gradient(#8b4c39, #6a362b);
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Books */
-.book-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.book-container:hover {
-  transform: translateY(-10px);
-}
-
-.book {
-  width: 120px;
-  height: 180px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-.book img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tag {
-  margin-top: 0.6em;
-  background-color: #874c62;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Poem Area */
-.poem-area {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(4px);
-  border-radius: 12px;
-  padding: 2em;
-  max-width: 800px;
-  margin: 4em auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.poem-area h2 {
-  font-size: 1.8rem;
-  color: #80485b;
-}
-
-.poem-area p {
-  white-space: pre-line;
   font-size: 1.1rem;
-  color: #4f3a3a;
-  line-height: 1.8;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1em;
+  border-left: 4px solid #aaa;
+  border-radius: 8px;
+  color: #ccc;
 }
 
 /* Contact */
 .contact {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.6);
   padding: 4em 2em;
-  border-top: 4px solid #874c62;
+  border-top: 1px solid #444;
 }
 
 .contact a {
-  color: #874c62;
-  font-weight: bold;
+  color: #bbb;
   text-decoration: none;
 }
 
 .contact .quote {
+  margin-top: 1em;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+/* Buttons - Explore & Learn */
+.explore-btn, .learn-btn {
+  display: inline-block;
   margin-top: 2em;
-  font-style: italic;
-  font-size: 1.2rem;
-  color: #6d4444;
+  padding: 0.8em 2em;
+  background-color: #d7ff00;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background 0.4s, box-shadow 0.3s ease-in-out, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Doodles */
-.doodle-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -2;
+.explore-btn:hover, .learn-btn:hover {
+  background-color: #c7eb00;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
 }
 
-.doodle {
+/* Discover Section */
+.discover-section {
+  padding: 5em 2em;
+  background: rgba(0, 0, 0, 0.5);
+  color: #eee;
+  display: flex;
+  justify-content: center;
+}
+
+.discover-container {
+  max-width: 1100px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2em;
+  margin: auto;
+}
+
+.discover-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.discover-img img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.discover-text {
+  flex: 1;
+}
+
+.discover-text h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5em;
+  font-family: 'Georgia', serif;
+  color: #fff;
+}
+
+.discover-text .subtext {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1em;
+}
+
+.discover-text p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1em;
+  color: #ccc;
+}
+
+/* Blog Section (Video Background Slider) */
+.blog-video-section {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+}
+
+.blog-video-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.blog-video-container video {
   position: absolute;
-  width: 60px;
-  height: 60px;
-  opacity: 0.08;
-  transform: rotate(0deg);
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: -1;
 }
 
-.doodle svg {
+.blog-video-overlay {
+  background: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
-  stroke: #333;
-  fill: none;
-  stroke-width: 1.2;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
 }
+
+.blog-content {
+  color: #fff;
+  max-width: 400px;
+}
+
+.blog-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.8rem;
+  margin: 0;
+}
+
+.blog-subtitle {
+  font-family: 'Brush Script MT', cursive;
+  font-size: 1.4rem;
+  margin: 0.5rem 0 2rem;
+}
+
+.blog-button {
+  display: inline-block;
+  padding: 0.7em 1.5em;
+  font-family: 'Georgia', serif;
+  font-size: 0.9rem;
+  color: #fff;
+  border: 1px solid #fff;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.blog-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Hide elements not in use */
+.shelf, .book-container, .book, .tag, .doodle-container, .doodle {
+  display: none;
+}
+/* Border/outline around blog video section */
+.blog-video-section {
+  position: relative;
+  height: 90vh;
+  overflow: hidden;
+  padding: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.1); /* soft light border */
+  border-radius: 12px;
+  margin: 3em auto;
+  width: 95%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
