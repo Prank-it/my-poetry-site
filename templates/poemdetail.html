@@ -1,1 +1,67 @@
-PPP																																@@@@IIOOOMMMMNNNNNNhhhiiiooommmIIIQQQQQQ
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='book.css') }}">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+<!-- Hero Section -->
+<section class="poem-intro-row video-background">
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="{{ url_for('static', filename='uploads/bgPoemVideo.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="poem-intro-container">
+    <div class="poem-intro-flex">
+      <div class="poem-intro-left">
+        {% if poem.thumbnail %}
+        <img src="{{ poem.thumbnail }}" class="poem-intro-thumbnail" alt="Poem Thumbnail">
+        {% endif %}
+      </div>
+      <div class="poem-intro-right">
+        <h1 class="poem-title">{{ poem.title }}</h1>
+        <p class="poem-intro-text">
+          This poem explores emotional landscapes through rhythmic language and vivid imagery.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Read Heading -->
+<section class="read-heading-section">
+  <h2 class="book-read-heading">Read Here</h2>
+  <p class="book-read-subtext">Turn the pages to experience the poem unfold</p>
+  <p class="book-read-poem-name"><em>{{ poem.title }}</em></p>
+</section>
+
+<!-- Book Section -->
+<section class="book-read-section">
+  <div class="book-wrapper">
+    <div class="book-container">
+      <div class="book-spiral">
+        {% for i in range(20) %}
+        <div class="spiral-ring"></div>
+        {% endfor %}
+      </div>
+
+      <div class="book">
+        {% for page in poem_pages %}
+        <div class="page">
+          <div class="page-content">
+            {% for line in page %}
+            <p>{{ line }}</p>
+            {% endfor %}
+            <div class="page-number">Page {{ loop.index }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <button class="page-btn" id="prevPage">←</button>
+      <button class="page-btn" id="nextPage">→</button>
+    </div>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='book.js') }}"></script>
+{% endblock %}

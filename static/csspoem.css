@@ -6,10 +6,18 @@
 
 body, html {
   font-family: 'Playfair Display', serif;
-  background-color: #fdfbf7;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7)),  /* Dark overlay, not too strong */
+    url('/static/uploads/poembgimg1.jpeg') ;
+  background-size: auto;  /* Tiled block size */
+  background-attachment: fixed;
+  background-position: top left;
   color: #222;
   scroll-behavior: smooth;
 }
+
+
+
 
 /* Main Section */
 .main-section {
@@ -17,8 +25,8 @@ body, html {
   justify-content: center;
   align-items: center;
   gap: 4rem;
-  padding: 6rem 4rem;
-  background: #fefcf6;
+  padding: 8rem 4rem;
+  background: #3a373a;
   flex-wrap: wrap;
 }
 
@@ -31,19 +39,20 @@ body, html {
   font-size: 3rem;
   letter-spacing: 1px;
   margin-bottom: 0.3rem;
+  color: #f1efef;
 }
 
 .text-content h2 {
   font-family: 'Great Vibes', cursive;
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #2c2c2c;
+  color: #f1efef;
 }
 
 .text-content p {
   font-size: 1.05rem;
   line-height: 1.7;
-  color: #444;
+  color: #c6d09f;
   margin-bottom: 1.8rem;
 }
 
@@ -79,14 +88,14 @@ body, html {
 .section-divider-dark {
   border: none;
   height: 2px;
-  background-color: #444;
+  background-color: #bacc82;
   margin: 5rem auto;
   width: 85%;
 }
 
 /* Packages Section */
 .packages-section {
-  background: #f6f5f2;
+   background: #3a373a;
   padding: 4rem 2rem;
   text-align: center;
 }
@@ -94,6 +103,7 @@ body, html {
 .section-title {
   font-size: 2.5rem;
   margin-bottom: 3rem;
+  color: #f1efef;
 }
 
 .package-grid {
@@ -106,7 +116,7 @@ body, html {
 .package-card {
   text-align: center;
   text-decoration: none;
-  color: #222;
+  color: #e0d3d3;
   transition: transform 0.3s ease;
 }
 

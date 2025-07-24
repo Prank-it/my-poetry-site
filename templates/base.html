@@ -1,247 +1,87 @@
-Static Queue:
-java
-Copy code
-class StaticQueue {
-    private int size;
-    private int[] queue;
-    private int front, rear;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Poem Shelf{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
 
-    public StaticQueue(int size) {
-        this.size = size;
-        this.queue = new int[size];
-        this.front = this.rear = -1;
+  <style>
+    /* Translucent Aesthetic Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      font-family: 'Playfair Display', serif;
     }
 
-    public void enqueue(int item) {
-        if (rear == size - 1) {
-            System.out.println("Queue is full. Cannot enqueue.");
-        } else {
-            if (front == -1) {
-                front = 0;
-            }
-            rear++;
-            queue[rear] = item;
-        }
+    .navbar .logo a {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #3c1c1c;
+      text-decoration: none;
     }
 
-    public int dequeue() {
-        if (front == -1) {
-            System.out.println("Queue is empty. Cannot dequeue.");
-            return -1;
-        } else {
-            int item = queue[front];
-            front++;
-            if (front > rear) {
-                front = rear = -1;
-            }
-            return item;
-        }
-    }
-}
-
-// Example usage:
-public class Main {
-    public static void main(String[] args) {
-        StaticQueue queue = new StaticQueue(5);
-        queue.enqueue(1);
-        queue.enqueue(2);
-        queue.enqueue(3);
-        System.out.println("Dequeued: " + queue.dequeue());
-        System.out.println("Dequeued: " + queue.dequeue());
-    }
-}
-Output:
-
-makefile
-Copy code
-Dequeued: 1
-Dequeued: 2
-Static Stack:
-java
-Copy code
-class StaticStack {
-    private int size;
-    private int[] stack;
-    private int top;
-
-    public StaticStack(int size) {
-        this.size = size;
-        this.stack = new int[size];
-        this.top = -1;
+    .navbar nav a {
+      margin-left: 1.5rem;
+      font-size: 1.1rem;
+      color: #3c1c1c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    public void push(int item) {
-        if (top == size - 1) {
-            System.out.println("Stack is full. Cannot push.");
-        } else {
-            top++;
-            stack[top] = item;
-        }
+    .navbar nav a:hover {
+      color: #000;
     }
 
-    public int pop() {
-        if (top == -1) {
-            System.out.println("Stack is empty. Cannot pop.");
-            return -1;
-        } else {
-            int item = stack[top];
-            top--;
-            return item;
-        }
-    }
-}
-
-// Example usage:
-public class Main {
-    public static void main(String[] args) {
-        StaticStack stack = new StaticStack(5);
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        System.out.println("Popped: " + stack.pop());
-        System.out.println("Popped: " + stack.pop());
-    }
-}
-Output:
-
-makefile
-Copy code
-Popped: 3
-Popped: 2
-Inheritance:
-java
-Copy code
-class Animal {
-    protected String name;
-
-    public Animal(String name) {
-        this.name = name;
+    body {
+      margin: 0;
+      padding-top: 90px; /* space for fixed navbar */
+      background-color: #000000;
     }
 
-    public void speak() {
-        System.out.println("Animal speaks");
+    .footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      color: #777;
+      font-family: 'Playfair Display', serif;
+      background: #f2ece7;
+      margin-top: 4rem;
     }
-}
+  </style>
+</head>
 
-class Dog extends Animal {
-    public Dog(String name) {
-        super(name);
-    }
+<body>
+  <header class="navbar">
+    <h1 class="logo"><a href="{{ url_for('index') }}">Poem Shelf</a></h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('poem_intro') }}">Poems</a>
+      <a href="{{ url_for('admin_dashboard') }}">Admin</a>
+      <a href="{{ url_for('index') }}#blog">Blog</a>
+    </nav>
+  </header>
 
-    @Override
-    public void speak() {
-        System.out.println(name + " says Woof!");
-    }
-}
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
 
-class Cat extends Animal {
-    public Cat(String name) {
-        super(name);
-    }
+  <footer class="footer">
+    <p>&copy; 2025 Poem Shelf. All rights reserved.</p>
+  </footer>
 
-    @Override
-    public void speak() {
-        System.out.println(name + " says Meow!");
-    }
-}
-
-// Example usage:
-public class Main {
-    public static void main(String[] args) {
-        Dog dog = new Dog("Buddy");
-        Cat cat = new Cat("Whiskers");
-        dog.speak();
-        cat.speak();
-    }
-}
-Output:
-
-Copy code
-Buddy says Woof!
-Whiskers says Meow!
-Abstraction:
-java
-Copy code
-abstract class Shape {
-    abstract double area();
-}
-
-class Circle extends Shape {
-    private double radius;
-
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-
-    @Override
-    double area() {
-        return Math.PI * radius * radius;
-    }
-}
-
-// Example usage:
-public class Main {
-    public static void main(String[] args) {
-        Circle circle = new Circle(5);
-        System.out.println("Circle Area: " + circle.area());
-    }
-}
-Output:
-
-mathematica
-Copy code
-Circle Area: 78.53981633974483
-Interface:
-java
-Copy code
-interface Shape {
-    double area();
-}
-
-class Circle implements Shape {
-    private double radius;
-
-    public Circle(double radius) {
-        this.radius = radius;
-    }
-
-    @Override
-    public double area() {
-        return Math.PI * radius * radius;
-    }
-}
-
-// Example usage:
-public class Main {
-    public static void main(String[] args) {
-        Circle circle = new Circle(5);
-        System.out.println("Circle Area: " + circle.area());
-    }
-}
-Output:
-
-mathematica
-Copy code
-Circle Area: 78.53981633974483
-Recursion:
-java
-Copy code
-public class Main {
-    public static void main(String[] args) {
-        int result = factorial(5);
-        System.out.println("Factorial of 5: " + result);
-    }
-
-    public static int factorial(int n) {
-        if (n == 0 || n == 1) {
-            return 1;
-        } else {
-            return n * factorial(n - 1);
-        }
-    }
-}
-Output:
-
-mathematica
-Copy code
-Factorial of 5: 120
+</body>
+</html>

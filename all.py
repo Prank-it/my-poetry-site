@@ -5,7 +5,7 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
-app.secret_key = 'your_secret_key_here'  # Replace with your secret key
+app.secret_key = 'your_secret_key_here'  # Replace with your own secure key
 
 # Firebase setup
 cred = credentials.Certificate('firebase_key.json')
@@ -37,14 +37,12 @@ def get_categorized_poems(poems):
         categories[cat].append(poem)
     return categories
 
-# Homepage
 @app.route('/')
 def index():
     poems = load_poems()
     categories = get_categorized_poems(poems)
     return render_template('index.html', categories=categories)
 
-# Admin login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if session.get('admin'):
@@ -60,20 +58,17 @@ def login():
             return render_template('login.html', error="Invalid credentials")
     return render_template('login.html')
 
-# Admin logout
 @app.route('/logout')
 def logout():
     session.pop('admin', None)
     return redirect(url_for('index'))
 
-# Admin dashboard
 @app.route('/admin')
 def admin_dashboard():
     if not session.get('admin'):
         return redirect(url_for('login'))
     return render_template('admin_dashboard.html')
 
-# Admin upload
 @app.route('/admin/post', methods=['GET', 'POST'])
 def admin_post():
     if not session.get('admin'):
@@ -103,7 +98,6 @@ def admin_post():
 
     return render_template('admin_post.html')
 
-# Admin edit
 @app.route('/admin/edit')
 def admin_edit():
     if not session.get('admin'):
@@ -111,11 +105,11 @@ def admin_edit():
     poems = load_poems()
     return render_template('admin_edit.html', poems=poems)
 
-# Admin update
 @app.route('/admin/update/<poem_id>', methods=['GET', 'POST'])
 def admin_update(poem_id):
     if not session.get('admin'):
         return redirect(url_for('login'))
+
     poem_ref = db.collection('poems').document(poem_id)
     poem = poem_ref.get().to_dict()
 
@@ -142,7 +136,6 @@ def admin_update(poem_id):
 
     return render_template('admin_update.html', poem=poem, poem_id=poem_id)
 
-# Admin delete
 @app.route('/admin/delete/<poem_id>')
 def admin_delete(poem_id):
     if not session.get('admin'):
@@ -150,7 +143,6 @@ def admin_delete(poem_id):
     db.collection('poems').document(poem_id).delete()
     return redirect(url_for('admin_edit'))
 
-# Category view with poem list
 @app.route('/category/<category_name>')
 def view_category(category_name):
     poems = load_poems()
@@ -158,21 +150,24 @@ def view_category(category_name):
     poems_in_category = categories.get(category_name, [])
     return render_template('category.html', category=category_name, poems=poems_in_category)
 
-# Individual poem view
 @app.route('/poem/<poem_id>')
 def view_poem(poem_id):
     doc = db.collection('poems').document(poem_id).get()
     if not doc.exists:
         return "Poem not found", 404
     poem = doc.to_dict()
-    return render_template('poem.html', poem=poem)
+    poem['id'] = poem_id
+
+    # ✅ Split content into pages of 15 lines each for page flipping
+    lines = poem['content'].split('\n')
+    poem_pages = [lines[i:i + 15] for i in range(0, len(lines), 10)]
+
+    return render_template('poemdetail.html', poem=poem, poem_pages=poem_pages)
+
 @app.route('/poem')
 def poem_intro():
     return render_template('poem.html')
 
-
-# Run the app with Render-compatible port binding
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
-
